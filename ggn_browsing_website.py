@@ -211,8 +211,15 @@ class GGn(object):
         url = original_url
 
         while True:
-            req = self.s.get(url, timeout=self.timeout)
+            try:
+                req = self.s.get(url, timeout=self.timeout)
+            except Exception as result:
+                req = self.s.get(original_url, timeout=self.timeout)
+                print('exception detected')
             all_link = re.findall(r'href=".*?"', req.text)
+            if len(all_link) == 0:
+                req = self.s.get(original_url, timeout=self.timeout)
+                all_link = re.findall(r'href=".*?"', req.text)
             approve_link = []
             for i in all_link:
                 flag = True
@@ -228,6 +235,7 @@ class GGn(object):
                 url = original_url + addtion_url
             else:
                 url = original_url + '/' + addtion_url
+            url = url.replace(r'&amp;', '&')
             print(url)
             time.sleep(1)
 
