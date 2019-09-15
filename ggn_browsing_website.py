@@ -19,7 +19,7 @@ HEADERS = {
                    "Chrome/72.0.3626.121 Safari/537.36")
 }
 
-BLOCK_KEY = ['#', 'logout', 'ico', 'passkey', 'authkey', 'auth', 'css', 'xml', 'http']
+BLOCK_KEY = ['#', 'logout', 'ico', 'passkey', 'authkey', 'auth', 'css', 'xml', 'http', 'javascript', 'mailto']
 
 
 class GGn(object):
@@ -54,6 +54,7 @@ class GGn(object):
 
         self.freeleech_torrents = {}
         self.smallest_torrents = {}
+        self.gold = '0'
 
     def ask_for_account(self):
         self.username = click.prompt("Username", type=str)
@@ -206,7 +207,7 @@ class GGn(object):
         click.echo("✔ Successfully logged in!")
         click.echo("-")
 
-    def browse_website(self):
+    def browse_website(self, timestop=5):
         original_url = "https://gazellegames.net"
         url = original_url
 
@@ -217,9 +218,20 @@ class GGn(object):
                 req = self.s.get(original_url, timeout=self.timeout)
                 print('exception detected')
             all_link = re.findall(r'href=".*?"', req.text)
-            if len(all_link) == 0:
-                req = self.s.get(original_url, timeout=self.timeout)
-                all_link = re.findall(r'href=".*?"', req.text)
+            userid_list = re.findall(r'var userid = .*?;', req.text)
+            # if len(userid_list) > 0:
+            #     userid = userid_list[0]
+            #     print(userid)
+            #     userid = userid[13:-1]
+            #     userpage = original_url + '/' + 'user.php?id=' + userid
+            #     print(userpage)
+            #     if url == userpage:
+            #         print('Gold:')
+            #         self.gold = re.findall(r'''<li>Site Usage: <span class="tooltip" title=".*?"''', req.text)
+            #         print(self.gold)
+            # if len(all_link) == 0:
+            #     req = self.s.get(original_url, timeout=self.timeout)
+            #     all_link = re.findall(r'href=".*?"', req.text)
             approve_link = []
             for i in all_link:
                 flag = True
@@ -237,7 +249,8 @@ class GGn(object):
                 url = original_url + '/' + addtion_url
             url = url.replace(r'&amp;', '&')
             print(url)
-            time.sleep(1)
+            timestop = random.randint(0, timestop)
+            time.sleep(timestop)
 
             
 
