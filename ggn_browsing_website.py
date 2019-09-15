@@ -19,7 +19,7 @@ HEADERS = {
                    "Chrome/72.0.3626.121 Safari/537.36")
 }
 
-BLOCK_KEY = ['#', 'logout', 'ico', 'passkey', 'authkey', 'auth', 'css', 'xml', 'http', 'javascript', 'mailto']
+BLOCK_KEY = ['#', 'logout', 'ico', 'passkey', 'authkey', 'auth', 'css', 'xml', 'http', 'javascript', 'mailto', 'png', 'jpg', 'gif']
 
 
 class GGn(object):
