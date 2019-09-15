@@ -7,6 +7,7 @@ import sys
 import json
 import configparser
 import time
+import random
 
 import click
 import requests
@@ -204,13 +205,34 @@ class GGn(object):
         click.echo("-")
 
     def browse_website(self):
-        url = "https://gazellegames.net"
-        r = self.s.get(url, timeout=self.timeout)
+        original_url = "https://gazellegames.net"
+        # r = self.s.get(url, timeout=self.timeout)
         # print(r.text)
-        m = re.findall(r'href="/.*?"', r.text)
-        print(len(m))
-        time.sleep(3)
+        # mm = re.findall(r'href=".*?"', r.text)
+        # m = []
+        # for item in mm:
+        #     flag = True
+        #     block_key = ['#', 'logout', 'ico', 'passkey', 'authkey', 'auth', 'css', 'xml']
+        #     for i in block_key:
+        #         if item.find(i)!=-1:
+        #             flag = False
+        #             break
+        #     if flag==True:
+        #         m.append(item)
         
+        # print(len(m))
+        # for item in m:
+        #     print(item)
+        
+        # time.sleep(3)
+        # a = random.randint(0, len(m))
+        # print(a)
+        # print(m[a])
+
+        while True:
+            url = original_url
+
+
 
 
 
