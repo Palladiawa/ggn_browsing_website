@@ -19,6 +19,8 @@ HEADERS = {
                    "Chrome/72.0.3626.121 Safari/537.36")
 }
 
+BLOCK_KEY = ['#', 'logout', 'ico', 'passkey', 'authkey', 'auth', 'css', 'xml', 'http']
+
 
 class GGn(object):
 
@@ -206,36 +208,29 @@ class GGn(object):
 
     def browse_website(self):
         original_url = "https://gazellegames.net"
-        # r = self.s.get(url, timeout=self.timeout)
-        # print(r.text)
-        # mm = re.findall(r'href=".*?"', r.text)
-        # m = []
-        # for item in mm:
-        #     flag = True
-        #     block_key = ['#', 'logout', 'ico', 'passkey', 'authkey', 'auth', 'css', 'xml']
-        #     for i in block_key:
-        #         if item.find(i)!=-1:
-        #             flag = False
-        #             break
-        #     if flag==True:
-        #         m.append(item)
-        
-        # print(len(m))
-        # for item in m:
-        #     print(item)
-        
-        # time.sleep(3)
-        # a = random.randint(0, len(m))
-        # print(a)
-        # print(m[a])
+        url = original_url
 
         while True:
-            url = original_url
+            req = self.s.get(url, timeout=self.timeout)
+            all_link = re.findall(r'href=".*?"', req.text)
+            approve_link = []
+            for i in all_link:
+                flag = True
+                for j in BLOCK_KEY:
+                    if i.find(j) != -1:
+                        flag = False
+                        break
+                if flag == True:
+                    approve_link.append(i)
+            rdint = random.randint(0, len(approve_link)-1)
+            addtion_url = approve_link[rdint][6:-1]
+            if addtion_url[0] == '/':
+                url = original_url + addtion_url
+            else:
+                url = original_url + '/' + addtion_url
+            print(url)
 
-
-
-
-
+            
 
 if __name__ == "__main__":
     ggn = GGn(timeout=60)
