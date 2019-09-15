@@ -229,6 +229,7 @@ class GGn(object):
             else:
                 url = original_url + '/' + addtion_url
             print(url)
+            time.sleep(1)
 
             
 
