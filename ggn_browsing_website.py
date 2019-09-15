@@ -6,6 +6,7 @@ import os
 import sys
 import json
 import configparser
+import time
 
 import click
 import requests
@@ -99,7 +100,7 @@ class GGn(object):
         if os.path.isfile(self.history_path):
             with open(self.history_path, 'r', encoding='utf-8') as f:
                 self.history = json.load(f)
-        click.echo(f"Loaded {len(self.history)} torrents history")
+        #click.echo(f"Loaded {len(self.history)} torrents history")
 
     def test_credentials(self):
         url = "https://gazellegames.net"
@@ -202,8 +203,18 @@ class GGn(object):
         click.echo("✔ Successfully logged in!")
         click.echo("-")
 
+    def browse_website(self):
+        url = "https://gazellegames.net"
+        r = self.s.get(url, timeout=self.timeout)
+        # print(r.text)
+        m = re.findall(r'href="/.*?"', r.text)
+        print(len(m))
+        time.sleep(3)
+
+
 
 
 if __name__ == "__main__":
     ggn = GGn(timeout=60)
+    ggn.browse_website()
 	
