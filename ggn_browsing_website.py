@@ -229,9 +229,9 @@ class GGn(object):
             #         print('Gold:')
             #         self.gold = re.findall(r'''<li>Site Usage: <span class="tooltip" title=".*?"''', req.text)
             #         print(self.gold)
-            # if len(all_link) == 0:
-            #     req = self.s.get(original_url, timeout=self.timeout)
-            #     all_link = re.findall(r'href=".*?"', req.text)
+            if len(all_link) == 0:
+                req = self.s.get(original_url, timeout=self.timeout)
+                all_link = re.findall(r'href=".*?"', req.text)
             approve_link = []
             for i in all_link:
                 flag = True
