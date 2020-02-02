@@ -1,6 +1,7 @@
 # ggn_browsing_website
 Automatically Browsing GGn
-'Do be very careful with the browsing speed! or you will get banned in hours!'
+
+**Do be very careful with the browsing speed! or you will get banned in hours!**
 
 I just got a mg from my friend who got banned by the ggn. So do be careful using this script.
 You can change the speed and the browser so the manager won't suspect you.
